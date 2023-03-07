@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Unlock</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="style.css">
+        <script src="" async defer></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="title">
+                <h1>Select Images to Authenticate</h1>
+            </div>
+            <!-- <h1 class="title">Select Images to Authenticate</h1> -->
+            <div class="grid-container">
+                <div id="grid-item"></div>
+                    <script>
+                        let gridContainer = document.getElementsByClassName("grid-container");
+                        let results = document.createElement("div");
+                        results.id = "grid-item";
+                        gridContainer[0].appendChild(results);
+                        
+                        let selectedImages = [];
+                        
+                        let imageList = JSON.parse(localStorage.getItem("selectedImages"));
+                        imageList=shuffleArray(imageList);
+                        function shuffleArray(array) {
+                            for (let i = array.length - 1; i > 0; i--) {
+                                let j = Math.floor(Math.random() * (i + 1));
+                                [array[i], array[j]] = [array[j], array[i]];
+                            }
+                            return array;
+                            }
+
+                        let codeList = JSON.parse(localStorage.getItem("code"));
+                        console.log(imageList);
+                        let count=0, breakAll=0;
+                        imageList.forEach(image => {
+                          console.log(image);
+                          const img = document.createElement("img");
+                          img.src = image.urls.small;
+                          img.alt = image.alt_description;
+                          img.style.width = "250px";
+                          img.style.height = "100px";
+                          img.style.margin = "10px";
+                          results.appendChild(img);
+                          img.addEventListener("click", function() {
+                            count++;
+                            console.log(image);
+                            if(img.style.opacity === "0.5") {
+                              img.style.opacity = "1";
+                              let index = selectedImages.indexOf(image);
+                              if (index > -1) {
+                                selectedImages.splice(index, 1);
+                              }
+                            } else {
+                              img.style.opacity = "0.5";
+                              selectedImages.push(image);
+                            }
+                            if(count==3){
+                                unlock();
+                            }
+                          });
+                        });
+                        function unlock(){
+                            console.log(codeList.length);
+                            console.log(selectedImages.length);
+                            for (let i = 0; i < codeList.length; i++) {
+                                let breakAll = 0;
+                                for (let j = 0; j < selectedImages.length; j++) {
+                                    if (selectedImages[j].id === codeList[i].id) {
+                                    break;
+                                    } else if (selectedImages[j].id !== codeList[i].id && j === selectedImages.length - 1) {
+                                    breakAll = 1;
+                                    }
+                                }
+                                if (breakAll === 1) {
+                                    window.location.assign("denied.html");
+                                    console.log("Not a match, try again!");
+                                    break;
+                                }
+                                if (i === codeList.length - 1 && breakAll === 0) {
+                                    window.location.assign("unlocked.html");
+                                    console.log("Unlocked!");
+                                }
+                                }
+
+                            
+                        }
+                        
+                        localStorage.setItem("selectedImages", JSON.stringify(selectedImages));
+
+
+                        </script>
+                        
+                        
+                        
+                    
+                    
+                    
+            </div>
+        </div>
+    </body>
+    
+</html>

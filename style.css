@@ -1,0 +1,144 @@
+body {
+    background-color: #333333;
+    background: rgb(54,217,182);
+    background: linear-gradient(90deg, rgb(89, 89, 90) 0%, rgba(32,152,126,1) 43%, rgba(0,212,255,1) 100%);
+}
+
+.title {
+    position: relative;
+    color: white;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+
+/*
+.image {
+    height: 150px;
+    width: 200px;
+}
+
+body {
+    background-color: #333;
+    display: flex;
+  }
+
+.sidebar {
+background-color: turquoise;
+width: 200px;
+padding: 10px;
+}
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 200px) ;
+    grid-template-rows: repeat(3, 150px) ;
+    gap: 10px;
+    margin-left: 10px;
+}
+
+.grid-item {
+background-size: cover;
+border: 1px solid black;
+cursor: pointer;
+}
+
+.sidebar-item {
+background-color: #333;
+color: white;
+border: 1px solid black;
+text-align: center;
+cursor: pointer;
+margin-bottom: 10px;
+padding: 10px;
+}
+.sidebar-button {
+background-color: green;
+color: white;
+border: 1px solid black;
+text-align: center;
+cursor: pointer;
+margin-bottom: 10px;
+padding: 10px;
+}
+
+#welcome-screen {
+display: none;
+text-align: center;
+padding: 50px;
+background-color: #333333;
+font-family: 'Cursive', Arial, sans-serif;
+position: relative;
+width: 100%;
+height: 0;
+padding-bottom: 56.25%; / 16:9 aspect ratio */
+
+#welcome-screen h1, #welcome-screen p {
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+}
+
+#go-button {
+position: absolute;
+bottom: 20px;
+right: 20px;
+background-color: turquoise;
+color: #333333;
+padding: 15px 15px;
+text-align: center;
+vertical-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 16px;
+border-radius: 25px;
+width: 50px;
+height: 50px;
+}
+
+#grid-container{
+    position: absolute;
+    margin: auto;
+    align-content: center;
+}
+  #grid-item {
+    display: grid;
+    grid-template-columns: repeat(3, 260px); 
+    grid-gap: 0px;
+    padding-left: 20%;
+  }
+
+  #grid-item img {
+    padding-left: 15%;
+    width: 100%;
+  height: 100%;
+  }
+  .sidebar-item {
+    background-color: #333;
+    color: white;
+    border: 1px solid black;
+    text-align: center;
+    cursor: pointer;
+    margin-bottom: 10px;
+    padding: 10px;
+    }
+    .sidebar-button {
+    background-color: green;
+    color: white;
+    border: 1px solid black;
+    text-align: center;
+    cursor: pointer;
+    margin-bottom: 10px;
+    padding: 10px;
+    }
+    .sidebar {
+        background-color: turquoise;
+        width: 200px;
+        padding: 10px;
+        }
+
+        #img{
+            width: auto;
+        }

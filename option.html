@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    /* Add CSS styles here */
+    .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 50%;
+  margin-bottom: 10px;
+}
+
+input[type="text"] {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid gray;
+  width: 70%;
+  margin-right: 10px;
+}
+
+button[type="submit"] {
+  padding: 10px 20px;
+  background-color: blue;
+  color: white;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Add form elements here -->
+    <form>
+      <div class="form-row"> Color:
+        <input type="text" placeholder="Enter text" >
+      </div>
+      <!-- Repeat the form-row 9 more times to get a total of 10 rows -->
+      <div class="form-row"> Car:
+        <input type="text" placeholder="Enter text">
+      </div>
+      <div class="form-row"> Dog:
+        <input type="text" placeholder="Enter text">
+      </div>
+      <div class="form-row"> Camera:
+        <input type="text" placeholder="Enter text">
+      </div>
+      <div class="form-row"> Smartphone:
+        <input type="text" placeholder="Enter text">
+      </div>
+      <div>
+        <button type="submit">Submit</button>
+        <button><a href="lock.html"></a></button>
+      </div>
+    </form>
+  </div>
+  <!-- Add JavaScript to handle form submissions here -->
+  <script>
+    
+    const form = document.querySelector("form");
+    const inputs = document.querySelectorAll("input");
+      form.addEventListener("submit", function(event) {
+        const data = [];
+        event.preventDefault();
+        inputs.forEach(element => {
+          data.push(element.value);
+        });
+        datajsoned = JSON.stringify(data);
+        console.log(datajsoned);
+    });
+    
+    // Convert the array into a JSON string
+
+// Store the data in local storage
+localStorage.setItem('datajsoned', datasoned);
+  </script>
+</body>
+</html>

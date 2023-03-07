@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="sidebar">
+      <div class="sidebar-item" id="city">City: <input type="text" id="city-input"> <button id="city-search-button">Search</button></div>
+      <div class="sidebar-item" id="car">Car: <input type="text" id="car-input"> <button id="car-search-button">Search</button></div>
+      <div class="sidebar-item" id="dog">Dog: <input type="text" id="dog-input"> <button id="dog-search-button">Search</button></div>
+      <div class="sidebar-button" id="submit-button" type="submit">Finalize</div>
+    </div>
+
+    <div class="grid-container">
+      <div id="results"></div>
+      <script>
+        document.getElementById("submit-button").addEventListener("click", function(){
+          window.location.assign("unlock.html");
+        });
+        document.getElementById("city-search-button").addEventListener("click", function() {
+        console.log("hola");
+        myChoices(document.getElementById("city-input").value);
+        });
+        document.getElementById("car-search-button").addEventListener("click", function() {
+        myChoices(document.getElementById("car-input").value);
+        });
+        document.getElementById("dog-search-button").addEventListener("click", function() {
+        myChoices(document.getElementById("dog-input").value);
+        });
+        const results = document.getElementById("results");
+        
+        const accessKey = "QZJ0DvaauKZTxjt7VuquEDeg5jHjY-5B5jFdO87uAbE";
+        const unsplashApiUrl = "https://api.unsplash.com/search/photos?query=";
+        const unsplashApiKey = "&client_id="+accessKey; 
+        const unsplashApi = "https://api.unsplash.com/photos/random";
+        
+        let selectedImages = [];
+         for (let i = 0; i < 6; i++) {
+         getRandomImage();
+         }
+
+         let photo=[];
+         let code=[];
+        function myChoices(search){
+        fetch(unsplashApiUrl + search + unsplashApiKey)
+        .then(response => response.json())
+        .then(data => {
+          results.innerHTML = "";
+          for (let i = 0; i < 3; i++) {
+            photo = data.results[i];
+            const img = document.createElement("img");
+            img.src = photo.urls.small;
+            img.alt = photo.alt_description;
+            img.style.width = "250px";
+            img.style.height = "100px";
+            img.style.margin = "10px";
+            results.appendChild(img);
+        
+            img.addEventListener("click", function() {
+              console.log(photo);
+              console.log(selectedImages);
+              selectedImages.push(photo);
+              code.push(photo);
+              img.style.opacity = 0.5;
+              localStorage.setItem("selectedImages",JSON.stringify(selectedImages));
+              localStorage.setItem("code",JSON.stringify(code));
+            });
+          }
+        });
+        }
+
+      async function getRandomImage() {
+        const response = await fetch(`${unsplashApi}?client_id=${unsplashApiKey}`);
+        const data = await response.json();
+        const image = new Image();
+        image.src = data.urls.regular;
+        image.alt = data.alt_description;
+        image.style.width = "300px";
+        image.style.height = "300px";
+        image.style.margin = "10px"; 
+        console.log(data);
+        selectedImages.push(data);
+      }
+      console.log(selectedImages);
+      </script>
+    </div>
+  </body>
+</html>
